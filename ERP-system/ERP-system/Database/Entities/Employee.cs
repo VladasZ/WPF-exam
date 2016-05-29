@@ -13,13 +13,22 @@ namespace ERP_system.Database.Entities
     public class Employee
     {
         public int Id { get; set; }
+
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public bool Sex { get; set; }
+
         public string Email { get; set; }
         public string Phone { get; set; }
         public DateTime BirthDate { get; set; }
         public string Address { get; set; }
+
+        public int TeamWorkEfficiency { get; set; }
+        public int Punctuality { get; set; }
+        public int WorkQuality { get; set; }
+        public int SomeAnotherQuality { get; set; }
+        public List<Task> Tasks { get; set; }
+
         [NotMapped]
         public Image Photo { get; set; }
         public byte[] PhotoData { get; set; }
@@ -36,10 +45,28 @@ namespace ERP_system.Database.Entities
                 Phone = user.Phone,
                 Sex = user.Sex,
                 Photo = user.Photo,
-                PhotoData = user.Photo.toByteArray()
+                PhotoData = user.Photo.toByteArray(),
+                Punctuality = StaticExtensions.rand.Next(0, 100),
+                TeamWorkEfficiency = StaticExtensions.rand.Next(0, 100),
+                WorkQuality = StaticExtensions.rand.Next(0, 100),
+                SomeAnotherQuality = StaticExtensions.rand.Next(0, 100),   
             };
 
-            return null;
+            List<Task> taskList = new List<Task>();
+
+            for (int i = StaticExtensions.rand.Next(3, 10); i > 0; i--)
+            {
+                taskList.Add(new Task()
+                {
+                    Name = StaticExtensions.RandomString(),
+                    PercentDone = StaticExtensions.rand.Next(0, 100),
+                    Performer = newEmployee
+                });
+            }
+
+            newEmployee.Tasks = taskList;
+
+            return newEmployee;
         }
 
     }

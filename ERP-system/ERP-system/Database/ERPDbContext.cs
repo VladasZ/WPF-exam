@@ -9,9 +9,11 @@ using System.Threading.Tasks;
 
 namespace ERP_system.Database
 {
-    class ERPDbContext /*: DbContext*/
+    public class ERPDbContext : DbContext
     {
-
+        public ERPDbContext() 
+            : base(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=ERP2;Integrated Security=True")
+        { }
 
         public DbSet<Employee> Employees { get; set; }
 

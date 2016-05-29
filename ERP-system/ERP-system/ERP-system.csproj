@@ -76,7 +76,9 @@
     <Compile Include="ClassesExtensions\ByteArrayExtension.cs" />
     <Compile Include="ClassesExtensions\ImageExtension.cs" />
     <Compile Include="ClassesExtensions\StaticExtensions.cs" />
-    <Compile Include="Database\DbContext.cs" />
+    <Compile Include="Database\DatabaseManager.cs" />
+    <Compile Include="Database\Entities\Task.cs" />
+    <Compile Include="Database\ERPDbContext.cs" />
     <Compile Include="Database\Entities\Employee.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
