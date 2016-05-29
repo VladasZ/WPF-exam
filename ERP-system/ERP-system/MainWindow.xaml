@@ -4,10 +4,77 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ERP_system"
+        xmlns:converter="clr-namespace:ERP_system.UILayerClasses"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="425.773" Width="632.045">
+
+    <Window.Resources>
+        <converter:SexConverter x:Key="sexConverter"></converter:SexConverter>
+    </Window.Resources>
+
     <Grid>
-        <ListBox x:Name="listBox" Margin="0,0,0,45"></ListBox>
-        <Button Margin="0,286,421,0" Click="Button_Click">load</Button>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+
+        <ListBox x:Name="employeesNameListBox" 
+                 Grid.Column="0">
+
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="0,2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="100" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock>
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}{0} {1}">
+                                    <Binding Path="FirstName" />
+                                    <Binding Path="LastName" />
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                        <Image Source="{Binding Photo}"></Image>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+
+        </ListBox>
+
+        <Grid Grid.Column="1" DataContext="{Binding ElementName=employeesNameListBox, Path=SelectedItem}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Image Grid.Column="0"></Image>
+
+                <StackPanel Grid.Column="1">
+                    <Label Content="{Binding FirstName}"></Label>
+                    <Label Content="{Binding LastName}"></Label>
+                    <Label Content="{Binding Sex, Converter={StaticResource sexConverter}}"></Label>
+                    <Label Content="{Binding BirthDate}"></Label>
+                </StackPanel>
+
+                <StackPanel></StackPanel>
+
+                <StackPanel Grid.Column="2">
+
+                </StackPanel>
+
+            </Grid>
+
+        </Grid>
+
     </Grid>
+
 </Window>

@@ -1,7 +1,9 @@
 ﻿using ERP_system.Database;
+using ERP_system.Database.Entities;
 using RandomUserGenerator;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,18 +28,19 @@ namespace ERP_system
         {
             InitializeComponent();
 
-            
+            DatabaseManager.DbContext.Employees.Load();
 
-            listBox.ItemsSource = (from usr in DataSource.getRandomUsers(3)
-                                   select usr.FirstName).ToArray();
+            employeesNameListBox.ItemsSource = DatabaseManager.DbContext.Employees.Local;
+
+            DataContext = employeesNameListBox.SelectedItem;
+
+
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            DatabaseManager.loadData();
 
-            listBox.ItemsSource = (from usr in DatabaseManager.DbContext.Employees
-                                   select usr.FirstName).ToArray();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using ERP_system.Database.Entities;
+﻿using ERP_system.ClassesExtensions;
+using ERP_system.Database.Entities;
 using RandomUserGenerator;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,10 @@ namespace ERP_system.Database
     {
         public ERPDbContext() 
             : base(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=ERP2;Integrated Security=True")
-        { }
+        {
+            foreach (Employee emp in Employees)
+                emp.Photo = emp.PhotoData.toImage();
+        }
 
         public DbSet<Employee> Employees { get; set; }
 
