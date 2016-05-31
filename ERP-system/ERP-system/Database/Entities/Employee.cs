@@ -31,6 +31,7 @@ namespace ERP_system.Database.Entities
 
         [NotMapped]
         public Image Photo { get; set; }
+        public string ImageURL { get; set; }
         public byte[] PhotoData { get; set; }
 
         public static Employee fromUser(User user)
@@ -46,6 +47,7 @@ namespace ERP_system.Database.Entities
                 Sex = user.Sex,
                 Photo = user.Photo,
                 PhotoData = user.Photo.toByteArray(),
+                ImageURL = user.PhotoURL,
                 Punctuality = StaticExtensions.rand.Next(0, 100),
                 TeamWorkEfficiency = StaticExtensions.rand.Next(0, 100),
                 WorkQuality = StaticExtensions.rand.Next(0, 100),

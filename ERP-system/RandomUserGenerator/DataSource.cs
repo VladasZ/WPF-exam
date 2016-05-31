@@ -30,7 +30,8 @@ namespace RandomUserGenerator
                     Address = result.location.city + " " + result.location.street,
                     Email = result.email,
                     Phone = result.cell,
-                    Photo = imageFromURL(result.picture.large)
+                    Photo = imageFromURL(result.picture.large),
+                    PhotoURL = result.picture.large
                 };
 
                 users.Add(newUser);

@@ -16,7 +16,9 @@ namespace ERP_system.Database
 
         public static void loadData()
         {
-            List<User> users = DataSource.getRandomUsers(10);
+            if (DbContext.Employees.Count() != 0) return;
+
+            List<User> users = DataSource.getRandomUsers(30);
 
             foreach (User user in users)
             {

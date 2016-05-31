@@ -28,19 +28,23 @@ namespace ERP_system
         {
             InitializeComponent();
 
-            DatabaseManager.DbContext.Employees.Load();
+            DatabaseManager.loadData();
+
+            DatabaseManager.DbContext.Employees.Include("Tasks").Load();
 
             employeesNameListBox.ItemsSource = DatabaseManager.DbContext.Employees.Local;
+            employeesNameListBox.SelectedIndex = 0;
 
-            DataContext = employeesNameListBox.SelectedItem;
 
 
 
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void employeesNameListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            taskEfficiencyLabel.DataContext = ((Employee)employeesNameListBox.SelectedItem).Tasks.Average(task => task.PercentDone);
 
+            DataContext = employeesNameListBox.SelectedItem;
         }
     }
 }

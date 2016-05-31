@@ -13,7 +13,7 @@ namespace ERP_system.Database
     public class ERPDbContext : DbContext
     {
         public ERPDbContext() 
-            : base(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=ERP2;Integrated Security=True")
+            : base(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=VladasZ_WPF_EXAM;Integrated Security=True")
         {
             foreach (Employee emp in Employees)
                 emp.Photo = emp.PhotoData.toImage();

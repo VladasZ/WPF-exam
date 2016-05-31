@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ERP_system"
         xmlns:converter="clr-namespace:ERP_system.UILayerClasses"
         mc:Ignorable="d"
-        Title="MainWindow" Height="425.773" Width="632.045">
+        Title="MainWindow" Height="479.773" Width="794.045">
 
     <Window.Resources>
         <converter:SexConverter x:Key="sexConverter"></converter:SexConverter>
@@ -14,21 +14,18 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="104*"/>
+            <ColumnDefinition Width="289*"/>
         </Grid.ColumnDefinitions>
 
         <ListBox x:Name="employeesNameListBox" 
-                 Grid.Column="0">
+                 Grid.Column="0" SelectionChanged="employeesNameListBox_SelectionChanged">
 
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Grid Margin="0,2">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="100" />
-                        </Grid.ColumnDefinitions>
-                        <TextBlock>
+                    <Grid Margin="0,2" Width="170">
+                        
+                        <TextBlock VerticalAlignment="Center">
                             <TextBlock.Text>
                                 <MultiBinding StringFormat="{}{0} {1}">
                                     <Binding Path="FirstName" />
@@ -36,14 +33,18 @@
                                 </MultiBinding>
                             </TextBlock.Text>
                         </TextBlock>
-                        <Image Source="{Binding Photo}"></Image>
+                        <Image 
+                               HorizontalAlignment="Right" 
+                               MaxHeight="50" 
+                               MaxWidth="50" 
+                               Source="{Binding ImageURL}"></Image>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
 
         </ListBox>
 
-        <Grid Grid.Column="1" DataContext="{Binding ElementName=employeesNameListBox, Path=SelectedItem}">
+        <Grid Grid.Column="1" DataContext="{Binding ElementName=employeesNameListBox, Path=SelectedItem, Mode=TwoWay}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
@@ -54,9 +55,10 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="0.3*"/>
                 </Grid.ColumnDefinitions>
 
-                <Image Grid.Column="0"></Image>
+                <Image Grid.Column="0" Source="{Binding ImageURL}"></Image>
 
                 <StackPanel Grid.Column="1">
                     <Label Content="{Binding FirstName}"></Label>
@@ -65,11 +67,41 @@
                     <Label Content="{Binding BirthDate}"></Label>
                 </StackPanel>
 
-                <StackPanel></StackPanel>
-
                 <StackPanel Grid.Column="2">
-
+                    <Label>Efficiency:</Label>
+                    <Label>Team Work Efficiency:</Label>
+                    <Label>Punctuality:</Label>
+                    <Label>Work Quality:</Label>
+                    <Label>Some Another Quality:</Label>
+                    <Label>Tasks Efficiency:</Label>
                 </StackPanel>
+
+                <StackPanel Grid.Column="3">
+                    <Label>1</Label>
+                    <Label Content="{Binding TeamWorkEfficiency}"></Label>
+                    <Label Content="{Binding Punctuality}"></Label>
+                    <Label Content="{Binding WorkQuality}"></Label>
+                    <Label Content="{Binding SomeAnotherQuality}"></Label>
+                    <Label x:Name="taskEfficiencyLabel" Content="{Binding}"></Label>
+                </StackPanel>
+
+            </Grid>
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0">
+                    <Label Content="{Binding Email}"></Label>
+                    <Label Content="{Binding Phone}"></Label>
+                    <Label Content="{Binding Address}"></Label>
+                </StackPanel>
+                <Label Grid.Column="1">Tasks list:</Label>
+                <ListBox x:Name="tasksListBox"
+                         Grid.Column="1"
+                         ItemsSource="{Binding Tasks}" Margin="0,24,0,0"></ListBox>
 
             </Grid>
 
